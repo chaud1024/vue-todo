@@ -14,6 +14,14 @@ const addListItem = (text) => {
   };
   listItem.value.push(newItem);
 };
+
+const listItemComplete = (item) => {
+  // console.log(listItem.value);
+  listItem.value = listItem.value.map((v) =>
+    v.id === item.id ? { ...v, complete: !v.complete } : v,
+  );
+  // console.log(listItem.value);
+};
 </script>
 <template>
   <Input @add-list="addListItem" />
@@ -21,7 +29,11 @@ const addListItem = (text) => {
     <p>할 일이 없습니다! 새로운 할 일을 생성하세요.</p>
   </div>
   <ul v-if="listItem.length > 0">
-    <ListItem v-for="item in listItem" :key="item.id" :item="item" />
+    <ListItem
+      v-for="item in listItem"
+      :key="item.id"
+      :item="item"
+      @list-complete="listItemComplete" />
   </ul>
 </template>
 
