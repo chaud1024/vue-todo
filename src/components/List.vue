@@ -26,6 +26,10 @@ const listItemComplete = (item) => {
 const listItemDelete = (item) => {
   listItem.value = listItem.value.filter((v) => v.id !== item.id);
 };
+
+const listClear = () => {
+  listItem.value = [];
+};
 </script>
 <template>
   <Input @add-list="addListItem" />
@@ -40,6 +44,7 @@ const listItemDelete = (item) => {
       @list-complete="listItemComplete"
       @list-delete="listItemDelete" />
   </ul>
+  <button @click="listClear">목록 삭제</button>
 </template>
 
 <style scoped>
