@@ -30,6 +30,12 @@ const listItemDelete = (item) => {
 const listClear = () => {
   listItem.value = [];
 };
+
+const listItemUpdate = (item) => {
+  listItem.value = listItem.value.map((v) =>
+    v.id === item.id ? { ...v, text: item.text } : v,
+  );
+};
 </script>
 <template>
   <Input @add-list="addListItem" />
@@ -42,9 +48,12 @@ const listClear = () => {
       :key="item.id"
       :item="item"
       @list-complete="listItemComplete"
-      @list-delete="listItemDelete" />
+      @list-delete="listItemDelete"
+      @list-update="listItemUpdate" />
   </ul>
-  <button @click="listClear">목록 삭제</button>
+  <div class="list-bottom">
+    <button class="clear" @click="listClear">목록 삭제</button>
+  </div>
 </template>
 
 <style scoped>
@@ -52,5 +61,11 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.list-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 50px;
 }
 </style>
