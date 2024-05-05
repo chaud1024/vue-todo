@@ -22,6 +22,10 @@ const listItemComplete = (item) => {
   );
   // console.log(listItem.value);
 };
+
+const listItemDelete = (item) => {
+  listItem.value = listItem.value.filter((v) => v.id !== item.id);
+};
 </script>
 <template>
   <Input @add-list="addListItem" />
@@ -33,7 +37,8 @@ const listItemComplete = (item) => {
       v-for="item in listItem"
       :key="item.id"
       :item="item"
-      @list-complete="listItemComplete" />
+      @list-complete="listItemComplete"
+      @list-delete="listItemDelete" />
   </ul>
 </template>
 
