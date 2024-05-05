@@ -2,12 +2,13 @@
 import { ref } from "vue";
 
 import Input from "@/components/Input.vue";
+import ListItem from "@/components/ListItem.vue";
 
 const listItem = ref([]);
 const addListItem = (text) => {
   console.log("list item 추가");
   const newItem = {
-    id: Math.random(),
+    id: Math.floor(Math.random() * 100),
     text: text,
     complete: false,
   };
@@ -20,9 +21,7 @@ const addListItem = (text) => {
     <p>할 일이 없습니다! 새로운 할 일을 생성하세요.</p>
   </div>
   <ul v-if="listItem.length > 0">
-    <li v-for="item in listItem" :key="item.id">
-      {{ item.text }}
-    </li>
+    <ListItem v-for="item in listItem" :key="item.id" :item="item" />
   </ul>
 </template>
 
