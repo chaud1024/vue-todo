@@ -4,6 +4,13 @@ const props = defineProps({
     type: Object,
   },
 });
+
+const emit = defineEmits(["list-complete"]);
+
+const listComplete = () => {
+  //   console.log("list complete");
+  emit("list-complete", props.item);
+};
 </script>
 
 <template>
@@ -12,7 +19,11 @@ const props = defineProps({
     class="todo-list"
     :class="{ complete: props.item.complete }">
     <div class="todo-list__left">
-      <input type="checkbox" role="checkbox" aria-labelledby="" />
+      <input
+        type="checkbox"
+        role="checkbox"
+        aria-labelledby=""
+        @click="listComplete" />
       <span id="">{{ props.item.text }}</span>
     </div>
     <div class="todo-list__right">
@@ -36,6 +47,14 @@ const props = defineProps({
     background-color: rgba(0, 128, 128, 0.161);
   }
 
+  &.complete {
+    background-color: rgba(168, 191, 191, 0.66);
+
+    & span {
+      text-decoration: line-through;
+    }
+  }
+
   .todo-list__left {
     display: flex;
     gap: 4px;
@@ -49,6 +68,10 @@ const props = defineProps({
     & i {
       cursor: pointer;
       padding: 2px 4px;
+
+      &:hover {
+        color: teal;
+      }
     }
   }
 }
