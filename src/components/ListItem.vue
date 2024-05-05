@@ -5,11 +5,15 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["list-complete"]);
+const emit = defineEmits(["list-complete", "list-delete"]);
 
 const listComplete = () => {
   //   console.log("list complete");
   emit("list-complete", props.item);
+};
+
+const listDelete = () => {
+  emit("list-delete", props.item);
 };
 </script>
 
@@ -31,7 +35,11 @@ const listComplete = () => {
         class="fa-regular fa-pen-to-square"
         aria-label="편집"
         role="button"></i>
-      <i class="fa-solid fa-trash-can" aria-label="삭제" role="button"></i>
+      <i
+        class="fa-solid fa-trash-can"
+        aria-label="삭제"
+        role="button"
+        @click="listDelete"></i>
     </div>
   </li>
 </template>
